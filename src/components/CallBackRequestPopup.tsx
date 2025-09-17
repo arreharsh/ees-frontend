@@ -10,7 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PhoneCall } from "lucide-react";
-import { useToast } from "@/hooks/use-toast"; // hook
+import { useToast } from "@/hooks/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"; // 👈 shadcn Select
 
 const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
   const [formData, setFormData] = useState({
@@ -21,8 +28,8 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (name: string, value: string) =>
+    setFormData({ ...formData, [name]: value });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +40,7 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "callback", // 👈 taaki backend ko pata chale kaunsa form hai
+          type: "callback",
           ...formData,
         }),
       });
@@ -41,7 +48,8 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
       if (res.ok) {
         toast({
           title: "✅ Thank you!",
-          description: "Your call back request has been submitted. Our team will contact you shortly.",
+          description:
+            "Your call back request has been submitted. Our team will contact you shortly.",
         });
         setFormData({ name: "", phone: "", time: "" });
       } else {
@@ -78,43 +86,54 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
 
         <form onSubmit={handleSubmit} className="space-y-3 mt-2">
           <div>
-            <Label htmlFor="name" className="text-sm">Full Name</Label>
+            <Label htmlFor="name" className="text-sm">
+              Full Name
+            </Label>
             <Input
               id="name"
               name="name"
               value={formData.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange("name", e.target.value)}
               placeholder="Your name"
               required
-              className="rounded-md h-9 text-sm"
+              className="rounded-md h-9 text-sm border-industrial"
             />
           </div>
 
           <div>
-            <Label htmlFor="phone" className="text-sm">Phone Number</Label>
+            <Label htmlFor="phone" className="text-sm">
+              Phone Number
+            </Label>
             <Input
               id="phone"
               name="phone"
               type="tel"
               value={formData.phone}
-              onChange={handleChange}
-              placeholder="+91-"
+              onChange={(e) => handleChange("phone", e.target.value)}
+              placeholder="+91-XXXXXXXXXX"
               required
-              className="rounded-md h-9 text-sm"
+              className="rounded-md h-9 text-sm border-industrial"
             />
           </div>
 
           <div>
-            <Label htmlFor="time" className="text-sm">Preferred Time</Label>
-            <Input
-              id="time"
-              name="time"
-              type="text"
+            <Label htmlFor="time" className="text-sm">
+              Preferred Time
+            </Label>
+            <Select
               value={formData.time}
-              onChange={handleChange}
-              placeholder="e.g., 10 AM - 1 PM"
-              className="rounded-md h-9 text-sm"
-            />
+              onValueChange={(val) => handleChange("time", val)}
+            >
+              <SelectTrigger className="w-full h-9 text-sm rounded-md border-industrial">
+                <SelectValue placeholder="Select a time slot" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="9 AM - 12 PM">9 AM - 12 PM</SelectItem>
+                <SelectItem value="12 PM - 3 PM">12 PM - 3 PM</SelectItem>
+                <SelectItem value="3 PM - 6 PM">3 PM - 6 PM</SelectItem>
+                <SelectItem value="6 PM - 9 PM">6 PM - 9 PM</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <Button
@@ -131,5 +150,6 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
 };
 
 export default CallBackRequestPopup;
+
 
 
