@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PhoneCall } from "lucide-react";
+import { useToast } from "@/hooks/use-toast"; // hook
 
 const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
   const [formData, setFormData] = useState({
@@ -17,14 +18,48 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
     phone: "",
     time: "",
   });
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Callback Request Submitted ✅");
-    setFormData({ name: "", phone: "", time: "" });
+    setLoading(true);
+
+    try {
+      const res = await fetch("https://ees-backend2-da9i2d7t2-harsh-prajapatis-projects-3fff4d64.vercel.app/api/form-handler", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "callback", // 👈 taaki backend ko pata chale kaunsa form hai
+          ...formData,
+        }),
+      });
+
+      if (res.ok) {
+        toast({
+          title: "✅ Thank you!",
+          description: "Your call back request has been submitted. Our team will contact you shortly.",
+        });
+        setFormData({ name: "", phone: "", time: "" });
+      } else {
+        toast({
+          title: "⚠️ Oops!",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "⚠️ Error",
+        description: "Unable to submit your request. Check your connection.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,7 +74,6 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
           </DialogTitle>
         </DialogHeader>
 
-        {/* Divider line */}
         <div className="w-full h-px bg-gray-200 my-2" />
 
         <form onSubmit={handleSubmit} className="space-y-3 mt-2">
@@ -85,9 +119,10 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
 
           <Button
             type="submit"
+            disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md h-9 text-sm"
           >
-            Submit Request
+            {loading ? "Submitting..." : "Submit Request"}
           </Button>
         </form>
       </DialogContent>
@@ -96,4 +131,5 @@ const CallBackRequestPopup = ({ trigger }: { trigger: React.ReactNode }) => {
 };
 
 export default CallBackRequestPopup;
+
 
