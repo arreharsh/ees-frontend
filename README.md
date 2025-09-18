@@ -41,6 +41,6 @@ npm run build
 ## 📩 Contact & Support
 For updates, bug fixes, or new features:
 - 👨‍💻 **Developer:** Harsh Prajapati
-- 📧 **Email:** arreharsh2gmail.com
+- 📧 **Email:** arreharsh@gmail.com
 - 📞 [Contact via WhatsApp](https://wa.me/917065196288)
 - 🛠 **Maintenance:** Monthly updates & support available (on request)
