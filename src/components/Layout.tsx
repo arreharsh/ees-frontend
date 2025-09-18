@@ -184,7 +184,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <div className="space-y-3 text-sm text-gray-300"> 
                 <div className="flex items-start space-x-3">
                   <MapPin className="w-4 h-4 mt-1 text-primary" />
-                  <span>faridabad, Haryana 121005</span>
+                  <span>Faridabad, Haryana 121005</span>
                 </div>
                 <div onClick={() => window.open('tel:+917011806885')} className="flex hover:text-white cursor-pointer items-center space-x-3">
                   <Phone className="w-4 h-4 text-primary" />
