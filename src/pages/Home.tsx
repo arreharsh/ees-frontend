@@ -55,7 +55,7 @@ const Home = () => {
   ];
 
   const stats = [
-    { number: '15+', label: 'Years Experience', color: 'text-primary' },
+    { number: '10+', label: 'Years Experience', color: 'text-primary' },
     { number: '10000+', label: 'Products Delivered', color: 'text-safety-orange' },
     { number: '500+', label: 'Happy Clients', color: 'text-green-500' },
     { number: '50+', label: 'Cities Served', color: 'text-purple-500' },
@@ -200,7 +200,7 @@ const Home = () => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span>ISO 9001:2015 Certified Manufacturing</span>
+                  <span>ISO 9001:14001 Certified Manufacturing</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500" />
