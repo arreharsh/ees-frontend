@@ -7,7 +7,7 @@
 
 ## 📖 Project Overview
 This repository contains the complete source code for **Ranjeet**'s website.  
-The site is built to be **modern, fast, and mobile-responsive**, and is deployed on **Netlify** for seamless hosting and updates.
+The site is built to be **modern, fast and mobile-responsive**, and is deployed on **Netlify** for seamless hosting and updates.
 
 **Tech Stack:**
 - **Frontend:** Vite.js, Tailwind, React.js
