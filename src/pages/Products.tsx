@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import GetAQuotePopup from '@/components/GetAQuotePopup';
+import CallBackRequestPopup from '@/components/CallBackRequestPopup';
 import {
   ArrowRight,
   Zap,
@@ -162,17 +163,18 @@ const Products = () => {
                       ))}
                     </div>
                   </div>
-
+                  <CallBackRequestPopup trigger={
                   <Button
                     asChild
                     variant="outline"
                     className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
                   >
-                    <Link to={`/products/${category.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                      View Details
+                    <div>
+                      Learn More
                       <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
+                    </div>
                   </Button>
+                  } />
                 </CardContent>
               </Card>
             ))}

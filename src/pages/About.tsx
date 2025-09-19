@@ -39,16 +39,16 @@ const About = () => {
   ];
 
   const milestones = [
-    { year: '2009', event: 'Company Founded', description: 'Started with a vision to revolutionize electrical safety in India' },
-    { year: '2012', event: 'ISO Certification', description: 'Achieved ISO 9001:2015 certification for quality management' },
-    { year: '2015', event: 'Product Expansion', description: 'Expanded product line to include advanced safety equipment' },
-    { year: '2018', event: 'Pan-India Network', description: 'Established distribution network across 50+ cities' },
-    { year: '2020', event: 'Technology Upgrade', description: 'Invested in CNC laser cutting and automation technology' },
-    { year: '2024', event: 'Industry Leadership', description: 'Recognized as leading manufacturer in electrical safety equipment' },
+    { year: '2016', event: 'Company Founded', description: 'Started with a vision to revolutionize electrical safety in India' },
+    { year: '2018', event: 'ISO Certification', description: 'Achieved ISO 9001:14001 certification for quality management' },
+    { year: '2020', event: 'Product Expansion', description: 'Expanded product line to include advanced safety equipment' },
+    { year: '2022', event: 'Pan-India Network', description: 'Established distribution network across 50+ cities' },
+    { year: '2023', event: 'Technology Upgrade', description: 'Invested in CNC laser cutting and automation technology' },
+    { year: '2025', event: 'Industry Leadership', description: 'Recognized as leading manufacturer in electrical safety equipment' },
   ];
 
   const certifications = [
-    'ISO 9001:2015 Certified',
+    'ISO 9001:14001 Certified',
     'BIS & ISI Approved',
     'IS 3043 Compliant',
     'Fire Retardant Materials',
@@ -78,11 +78,11 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl lg:text-4xl font-bold text-industrial-dark">
-                Pioneering Electrical Safety Since 2009
+                Pioneering Electrical Safety Since 2016
               </h2>
               <p className="text-lg text-industrial-medium leading-relaxed">
                 Easy Electrical & Safety (EES) has been at the forefront of electrical infrastructure 
-                manufacturing in India for over 15 years. Founded with a vision to make electrical 
+                manufacturing in India for over 10 years. Founded with a vision to make electrical 
                 installations safer and more reliable, we have grown from a small startup to a 
                 trusted name in the industry.
               </p>
@@ -94,7 +94,7 @@ const About = () => {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-muted rounded-lg">
-                  <div className="text-2xl font-bold text-primary">15+</div>
+                  <div className="text-2xl font-bold text-primary">10+</div>
                   <div className="text-sm text-industrial-medium">Years Experience</div>
                 </div>
                 <div className="text-center p-4 bg-muted rounded-lg">

@@ -16,7 +16,7 @@ import {
   Globe,
   HeadphonesIcon
 } from 'lucide-react';
-import heroImage from '@/assets/hero-electrical.jpg';
+import heroImage from '@/assets/hero-electrical.webp';
 import manufacturingImage from '@/assets/manufacturing-facility.jpg';
 
 const Home = () => {

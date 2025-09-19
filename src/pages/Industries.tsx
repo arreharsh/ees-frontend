@@ -16,6 +16,7 @@ import {
   ArrowRight,
   CheckCircle
 } from 'lucide-react';
+import CallBackRequestPopup from '@/components/CallBackRequestPopup';
 
 const Industries = () => {
   const industries = [
@@ -173,7 +174,7 @@ const Industries = () => {
                       ))}
                     </div>
                   </div>
-
+                  <CallBackRequestPopup trigger={
                   <Button 
                     variant="outline" 
                     size="sm"
@@ -182,6 +183,7 @@ const Industries = () => {
                     Learn More
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
+                  } />
                 </CardContent>
               </Card>
             ))}
