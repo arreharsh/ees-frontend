@@ -192,7 +192,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
                 <div onClick={() => window.open('mailto:easyelectrical1154@gmail.com')} className="flex hover:text-white cursor-pointer items-center space-x-3">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span> easyelecrical1154@gmail.com <br /> info@easyelectrical.in</span>
+                  <span> easyelecrical1154@gmail.com</span>
                 </div>
               </div>
             </div>
