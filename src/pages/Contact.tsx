@@ -65,7 +65,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone Numbers',
-      details: ['+91-9958382854', '+91-7011806885 (Mobile)'],
+      details: ['+91-7011806885 (Mobile)','+91-9958382854'],
       color: 'text-green-500',
     },
     {
