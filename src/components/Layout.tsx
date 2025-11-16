@@ -32,8 +32,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b shadow-md border-border/50 sticky top-0 z-50">
-        <div className=" container-wide p-4 py-6">
+      <header className="bg-white/90 backdrop-blur-sm border-b shadow-md border-border/50 m-4 rounded-lg sticky top-2 z-50">
+        <div className=" container-wide p-4 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
@@ -41,7 +41,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <img className='object-contain rounded-lg' src={logo} alt="Logo" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-industrial-dark">
+                <h1 className=" text-lg font-bold text-industrial-dark">
                   Easy Electrical & Safety
                 </h1>
                 <p className="text-xs text-industrial-medium">
@@ -73,7 +73,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2"
+              className="lg:hidden "
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
