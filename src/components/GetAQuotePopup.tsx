@@ -33,7 +33,7 @@ const GetAQuotePopup = ({ trigger }: { trigger: React.ReactNode }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://ees-backend2.vercel.app/api/form-handler", {
+      const res = await fetch("https://api.easyelectrical.in/api/form-handler", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
