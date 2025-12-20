@@ -1,30 +1,32 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import GetAQuotePopup from '@/components/GetAQuotePopup';
-import CallBackRequestPopup from '@/components/CallBackRequestPopup';
-import logo from '@/assets/logo.png'
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import GetAQuotePopup from "@/components/GetAQuotePopup";
+import CallBackRequestPopup from "@/components/CallBackRequestPopup";
+import logo from "@/assets/logo.png";
 import {
   Zap,
   Phone,
   Mail,
   MapPin,
   Menu,
-  X
-} from 'lucide-react';
-import { useState } from 'react';
+  X,
+  Github,
+  GithubIcon,
+} from "lucide-react";
+import { useState } from "react";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Products', href: '/products' },
-    { name: 'Industries', href: '/industries' },
-    { name: 'Technology', href: '/technology' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Products", href: "/products" },
+    { name: "Industries", href: "/industries" },
+    { name: "Technology", href: "/technology" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -38,7 +40,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
               <div className="w-10 h-10  rounded-lg flex items-center justify-center">
-                <img className='object-contain rounded-lg' src={logo} alt="Logo" />
+                <img
+                  className="object-contain rounded-lg"
+                  src={logo}
+                  alt="Logo"
+                />
               </div>
               <div>
                 <h1 className=" text-lg font-bold text-industrial-dark">
@@ -56,19 +62,26 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm font-medium text-black transition-colors hover:text-primary ${isActive(item.href)
-                      ? 'text-primary border-b-2 border-primary pb-1'
-                      : 'text-industrial-medium'
-                    }`}
+                  className={`text-sm font-medium text-black transition-colors hover:text-primary ${
+                    isActive(item.href)
+                      ? "text-primary border-b-2 border-primary pb-1"
+                      : "text-industrial-medium"
+                  }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <GetAQuotePopup trigger={
-                <Button variant="default" size="sm" className="btn-hover-lift">
-                  Get Quote
-                </Button>
-              } />
+              <GetAQuotePopup
+                trigger={
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="btn-hover-lift"
+                  >
+                    Get Quote
+                  </Button>
+                }
+              />
             </nav>
 
             {/* Mobile menu button */}
@@ -92,24 +105,30 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-sm font-medium py-2 px-3 rounded-md transition-colors ${isActive(item.href)
-                        ? 'text-primary bg-muted'
-                        : 'text-industrial-medium hover:text-primary hover:bg-muted/50'
-                      }`}
+                    className={`text-sm font-medium py-2 px-3 rounded-md transition-colors ${
+                      isActive(item.href)
+                        ? "text-primary bg-muted"
+                        : "text-industrial-medium hover:text-primary hover:bg-muted/50"
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
                   </Link>
                 ))}
-                
-                <div className="border-t border-border pt-2 pb-[-0.5rem]">
-                  <GetAQuotePopup trigger={
-                    <Button variant="default" size="sm" className="btn-hover-lift rounded-md w-full">
-                      Get Quote
-                    </Button>
-                  } />
-                </div>
 
+                <div className="border-t border-border pt-2 pb-[-0.5rem]">
+                  <GetAQuotePopup
+                    trigger={
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="btn-hover-lift rounded-md w-full"
+                      >
+                        Get Quote
+                      </Button>
+                    }
+                  />
+                </div>
               </div>
             </nav>
           )}
@@ -127,13 +146,19 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8  rounded-lg flex items-center justify-center">
-                  <img className='object-contain rounded-lg' src={logo} alt="logo" />
+                  <img
+                    className="object-contain rounded-lg"
+                    src={logo}
+                    alt="logo"
+                  />
                 </div>
-                <h3 className="text-lg font-semibold">Easy Electrical & Safety</h3>
+                <h3 className="text-lg font-semibold">
+                  Easy Electrical & Safety
+                </h3>
               </div>
               <p className="text-sm text-gray-300 leading-relaxed">
-                Leading manufacturer of electrical boxes and safety equipment in India.
-                Committed to safety, reliability, and innovation.
+                Leading manufacturer of electrical boxes and safety equipment in
+                India. Committed to safety, reliability, and innovation.
               </p>
               <div className="flex space-x-4">
                 <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
@@ -181,16 +206,24 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             {/* Contact */}
             <div>
               <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-              <div className="space-y-3 text-sm text-gray-300"> 
+              <div className="space-y-3 text-sm text-gray-300">
                 <div className="flex items-start space-x-3">
                   <MapPin className="w-4 h-4 mt-1 text-primary" />
                   <span>Faridabad, Haryana 121005</span>
                 </div>
-                <div onClick={() => window.open('tel:+917011806885')} className="flex hover:text-white cursor-pointer items-center space-x-3">
+                <div
+                  onClick={() => window.open("tel:+917011806885")}
+                  className="flex hover:text-white cursor-pointer items-center space-x-3"
+                >
                   <Phone className="w-4 h-4 text-primary" />
                   <span>+91 70118 06885</span>
                 </div>
-                <div onClick={() => window.open('mailto:easyelectrical1154@gmail.com')} className="flex hover:text-white cursor-pointer items-center space-x-3">
+                <div
+                  onClick={() =>
+                    window.open("mailto:easyelectrical1154@gmail.com")
+                  }
+                  className="flex hover:text-white cursor-pointer items-center space-x-3"
+                >
                   <Mail className="w-4 h-4 text-primary" />
                   <span> easyelecrical1154@gmail.com</span>
                 </div>
@@ -198,8 +231,25 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </div>
           </div>
 
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2025 Easy Electrical & Safety. All rights reserved.</p>
+          <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p className="flex flex-wrap items-center justify-center gap-1.5">
+              <span>© 2025 Easy Electrical & Safety.</span>
+
+              <span>Developed with ♡ by</span>
+
+              <a
+                href="https://www.harshstack.me"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-primary transition-colors"
+              >
+                <GithubIcon className="h-4 w-4" />
+                <span className="underline-offset-2 hover:underline">
+                  {" "}
+                  @arreharsh
+                </span>
+              </a>
+            </p>
           </div>
         </div>
       </footer>
