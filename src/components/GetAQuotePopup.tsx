@@ -33,7 +33,7 @@ const GetAQuotePopup = ({ trigger }: { trigger: React.ReactNode }) => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://api.easyelectrical.in/api/form-handler", {
+      const res = await fetch("/.netlify/functions/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
