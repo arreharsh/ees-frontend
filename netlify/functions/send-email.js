@@ -1,20 +1,17 @@
 import nodemailer from "nodemailer";
+import fs from "fs";
+import path from "path";
 
 export async function handler(event) {
-  
   const headers = {
     "Access-Control-Allow-Origin": "https://www.easyelectrical.in",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
- 
+  // Preflight
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: "",
-    };
+    return { statusCode: 200, headers };
   }
 
   if (event.httpMethod !== "POST") {
@@ -36,6 +33,65 @@ export async function handler(event) {
       };
     }
 
+    // -------------------------
+    // VALIDATION
+    // -------------------------
+    if (type === "callback") {
+      if (!data.name || !data.phone || !data.time) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: "Missing callback fields" }),
+        };
+      }
+    }
+
+    if (type === "quote") {
+      if (!data.name || !data.phone || !data.email) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: "Missing quote fields" }),
+        };
+      }
+    }
+
+    // -------------------------
+    // TEMPLATE SELECT
+    // -------------------------
+    const templatePath =
+      type === "callback"
+        ? path.join(
+            process.cwd(),
+            "netlify/functions/templates/callback.html"
+          )
+        : path.join(
+            process.cwd(),
+            "netlify/functions/templates/getquote.html"
+          );
+
+    let html = fs.readFileSync(templatePath, "utf8");
+
+    // -------------------------
+    // REPLACE PLACEHOLDERS
+    // -------------------------
+    html = html
+      .replace(/{{name}}/g, data.name || "")
+      .replace(/{{phone}}/g, data.phone || "")
+      .replace(/{{time}}/g, data.time || "")
+      .replace(/{{email}}/g, data.email || "")
+      .replace(/{{message}}/g, data.message || "")
+      .replace(/{{requirement}}/g, data.requirement || "")
+      .replace(
+        /{{title}}/g,
+        type === "callback"
+          ? "📞 New Callback Request"
+          : "💰 New Quote Request"
+      );
+
+    // -------------------------
+    // MAIL TRANSPORT
+    // -------------------------
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -44,33 +100,17 @@ export async function handler(event) {
       },
     });
 
-    let subject = "";
-    let html = "";
+    const subject =
+      type === "callback"
+        ? "📞 New Callback Request"
+        : "💰 New Quote Request";
 
-    if (type === "callback") {
-      subject = "📞 New Callback Request";
-      html = `
-        <h2>New Callback Request</h2>
-        <p><b>Name:</b> ${data.name}</p>
-        <p><b>Phone:</b> ${data.phone}</p>
-        <p><b>Preferred Time:</b> ${data.time}</p>
-      `;
-    }
-
-    if (type === "quote") {
-      subject = "💰 New Quote Request";
-      html = `
-        <h2>New Quote Request</h2>
-        <p><b>Name:</b> ${data.name}</p>
-        <p><b>Email:</b> ${data.email}</p>
-        <p><b>Phone:</b> ${data.phone}</p>
-        <p><b>Requirement:</b> ${data.requirement}</p>
-        <p><b>Message:</b> ${data.message}</p>
-      `;
-    }
-
+    // -------------------------
+    // SEND MAIL
+    // -------------------------
     await transporter.sendMail({
-      from: `"Website Lead" <${process.env.SMTP_USER}>`,
+      from: `"${data.name || "Website Lead"}" <${process.env.SMTP_USER}>`,
+      replyTo: data.email || undefined,
       to: process.env.RECEIVER_EMAIL,
       subject,
       html,
@@ -85,7 +125,7 @@ export async function handler(event) {
       }),
     };
   } catch (err) {
-    console.error(err);
+    console.error("EMAIL ERROR:", err);
     return {
       statusCode: 500,
       headers,
